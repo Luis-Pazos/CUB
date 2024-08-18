@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<html lang="es">
+<!--
 <html lang="es" {
     box-sizing: border-box;
     width: 250px;
@@ -8,7 +10,7 @@
 *, *:before, *:after {
   box-sizing: inherit;
 }>
-
+-->
 
 <head>
     <meta charset="UTF-8">
@@ -36,14 +38,14 @@
         <br><br>    
 
         <form>
-            <label>INTRODUCE MILIGRAMOS DEL FÁRMACO:</label> 
-            <input id="ml-gr" inputmode="decimal" type="number" maxlength="3" size="3" name="ml-gr" required autofocus ><br><br>
-            <label>INTRODUCE KILOS PACIENTE:</label>
-            <input id="kilos" inputmode="decimal" type="number" maxlength="3" size="3" name="kilos" required ><br><br>
-            <label> MILILITROS SUERO:</label>
-            <input id="ml-l" inputmode="decimal" type="number" maxlength="3" size="3" name="ml-l" required ><br><br>
-            <label> MICROGRAMOS POR KILO/MINUTO:</label>
-            <input id="mg-km" inputmode="decimal" type="number" maxlength="4" size="4" name="mg-km" required ><br><br>
+            <label>MILIGRAMOS DEL FÁRMACO:</label> 
+            <input id="ml-gr" inputmode="decimal" type="number" maxlength="3" size="4" name="ml-gr" pattern="[0-9]{0,4}" required autofocus ><br><br>
+            <label>KILOS PACIENTE:</label>
+            <input id="kilos" inputmode="decimal" type="number" maxlength="3" size="4" name="kilos" pattern="[0-9]{0,4}" required ><br><br>
+            <label>MILILITROS SUERO:</label>
+            <input id="ml-l" inputmode="decimal" type="number" maxlength="3" size="4" name="ml-l" pattern="[0-9]{0,4}" required ><br><br>
+            <label>MICROGRAMOS POR KILO/MINUTO:</label>
+            <input id="mg-km" inputmode="decimal" type="number" maxlength="4" size="4" name="mg-km" pattern="[0-9]{0,4}" required ><br><br>
         </form>
 
             <script>
@@ -62,7 +64,7 @@
 
                     console.log (mlgr2.length+" "+kilos2.length+" "+mll2.length+" "+mgkm2.length);
 
-                    document.getElementById("demo2").innerHTML = "Valor 1: "+mlgr+ ",  valor 2: "+kilos+" , valor 3: "+mll+" ,valor 4: "+mgkm;
+                    //document.getElementById("demo2").innerHTML = "Valor 1: "+mlgr+ ",  valor 2: "+kilos+" , valor 3: "+mll+" ,valor 4: "+mgkm;
 
                     var mgkgmin = (mgkm * kilos * 60) /1000;
                     var solucion = (mll * mgkgmin) /mlgr;
@@ -72,14 +74,15 @@
                     //*** PROBAR CON UNDEFINED PARA LOS CAMPOS VACÍOS ***
  
                     ///if ((mlgr2.length===3) || (kilos2.length===3) || (mll2.length===3) || (mgkm2.length===3))
-                    if ((isNaN(mlgr2)) || (isNaN(kilos2)) || (isNaN(mll2)) || (isNaN(mgkm2)))
+                    if ((isNaN(mlgr2)) && (isNaN(kilos2)) && (isNaN(mll2)) && (isNaN(mgkm2)))
+                      {
+                        //Si todos los campos están en blanco recarga, sino deja seguir rellenando
+                        alert ("Todos los campos están en blanco!!");
+                        location.reload();
+                      } else  if ((isNaN(mlgr2)) || (isNaN(kilos2)) || (isNaN(mll2)) || (isNaN(mgkm2)))
                       {
                         alert ("No puede haber campos en blanco");
-                        //Si todos los campos están en blanco recarga, sino deja seguir rellenando
-                        //if ((isNaN(mlgr2)) && (isNaN(kilos2)) && (isNaN(mll2)) && (isNaN(mgkm2)))
-                      //{
-                        //location.reload();
-                      //}
+                      
                     } else {
 
                         document.getElementById("demo").innerHTML = "La solución es "+solredondeada+ " mililitros hora";
@@ -87,7 +90,6 @@
                         //document.getElementById("demo2").innerHTML = "Valor 1: "+mlgr+ ",  valor 2: "+kilos+" , valor 3: "+mll+" ,valor 4: "+mgkm;
                         
                         document.getElementById("demo3").innerHTML = '<button onclick=location.reload()>NUEVO CÁLCULO</button>';
-                        
 
                     }
             }
@@ -104,9 +106,7 @@
 
             <p id="demo3" class="text-center text-warning"></p>
 
-            
-   
-
+        
             <br><br>
                      </div>
         </div>
