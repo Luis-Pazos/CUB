@@ -2,12 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Calculadora dosis</title>
   <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  
   <!-- Bootstrap CSS v5.2.1 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -26,13 +24,13 @@
 
         <form>
             <label>INTRODUCE MILIGRAMOS DEL FÁRMACO:</label> 
-            <input inputmode="decimal" id="ml-gr" type="number" maxlength="3" size="3" name="ml-gr" required autofocus ><br><br>
+            <input id="ml-gr" type="number" maxlength="3" size="3" name="ml-gr" required autofocus ><br><br>
             <label>INTRODUCE KILOS PACIENTE:</label>
-            <input inputmode="decimal" id="kilos" type="number" maxlength="3" size="3" name="kilos" required ><br><br>
+            <input id="kilos" type="number" maxlength="3" size="3" name="kilos" required ><br><br>
             <label> MILILITROS SUERO:</label>
-            <input inputmode="decimal" id="ml-l" type="number" maxlength="3" size="3" name="ml-l" required ><br><br>
+            <input id="ml-l" type="number" maxlength="3" size="3" name="ml-l" required ><br><br>
             <label> MICROGRAMOS POR KILO/MINUTO:</label>
-            <input inputmode="decimal" id="mg-km" type="number" maxlength="4" size="4" name="mg-km" required ><br><br>
+            <input id="mg-km" type="number" maxlength="4" size="4" name="mg-km" required ><br><br>
         </form>
 
             <script>
@@ -51,26 +49,30 @@
 
                     console.log (mlgr2.length+" "+kilos2.length+" "+mll2.length+" "+mgkm2.length);
 
-                    document.getElementById("demo2").innerHTML = "Valor 1: "+mlgr+ ",  valor 2: "+kilos+" , valor 3: "+mll+" ,valor 4: "+mgkm;
+                    //document.getElementById("demo2").innerHTML = "Valor 1: "+mlgr+ ",  valor 2: "+kilos+" , valor 3: "+mll+" ,valor 4: "+mgkm;
 
                     var mgkgmin = (mgkm * kilos * 60) /1000;
                     var solucion = (mll * mgkgmin) /mlgr;
 
                     var solredondeada = solucion.toFixed(2);
+
+                    //*** PROBAR CON UNDEFINED PARA LOS CAMPOS VACÍOS ***
  
                     ///if ((mlgr2.length===3) || (kilos2.length===3) || (mll2.length===3) || (mgkm2.length===3))
                     if ((isNaN(mlgr2)) || (isNaN(kilos2)) || (isNaN(mll2)) || (isNaN(mgkm2)))
                       {
                         alert ("No puede haber campos en blanco");
-                        //location.reload();
+                        location.reload();
                     } else {
 
                         document.getElementById("demo").innerHTML = "La solución es "+solredondeada+ " mililitros hora";
 
-                        document.getElementById("demo2").innerHTML = "Valor 1: "+mlgr+ ",  valor 2: "+kilos+" , valor 3: "+mll+" ,valor 4: "+mgkm;
+                        //document.getElementById("demo2").innerHTML = "Valor 1: "+mlgr+ ",  valor 2: "+kilos+" , valor 3: "+mll+" ,valor 4: "+mgkm;
+                        
+                        document.getElementById("demo3").innerHTML = '<button onclick=location.reload()>NUEVO CÁLCULO</button>';
                         
                     }
-                }
+            }
 
             </script>
 
@@ -82,10 +84,8 @@
             <h2 id="demo" class="text-center text-warning"></h2> 
             <p id="demo2"></p>
 
-            <button onclick=location.reload()>NUEVO CÁLCULO</button>
-            <br><br>
-   
-
+            <p id="demo3" class="text-center text-warning"></p>
+                
             <br><br>
                      </div>
         </div>
